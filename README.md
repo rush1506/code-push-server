@@ -17,26 +17,26 @@ CodePush Server is a CodePush progam server! microsoft CodePush cloud is slow in
 
 ## 正确使用code-push热更新
 
-- 苹果允许使用热更新[Apple's developer agreement](https://developer.apple.com/programs/ios/information/iOS_Program_Information_4_3_15.pdf), 但是规定不能弹框提示用户更新，影响用户体验。 而Google Play恰好相反，必须弹框告知用户更新。然而中国的android市场都必须关闭更新弹框，否则会在审核应用时以“请上传最新版本的二进制应用包”驳回应用。
-- react-native 不同平台bundle包不一样，在使用code-push-server的时候必须创建不同的应用来区分(eg. CodePushDemo-ios 和 CodePushDemo-android)
-- react-native-code-push只更新资源文件,不会更新java和Objective C，所以npm升级依赖包版本的时候，如果依赖包使用的本地化实现, 这时候必须更改应用版本号(ios修改Info.plist中的CFBundleShortVersionString, android修改build.gradle中的versionName), 然后重新编译app发布到应用商店。
-- 推荐使用code-push release-react 命令发布应用，该命令合并了打包和发布命令(eg. code-push release-react CodePushDemo-ios ios -d Production)
-- 每次向App Store提交新的版本时，也应该基于该提交版本同时向code-push-server发布一个初始版本。(因为后面每次向code-push-server发布版本时，code-puse-server都会和初始版本比较，生成补丁版本)
+- Apple allows the use of hot updates[Apple's developer agreement](https://developer.apple.com/programs/ios/information/iOS_Program_Information_4_3_15.pdf), But the provisions can not be prompted to update the user box, affecting the user experience. And Google Play happens to be the opposite, you must inform the user to update. However, China's android market must close the update box, otherwise it will be in the audit application to "please upload the latest version of the binary application package" to reject the application.
+- react-native Different platforms bundle packets are not the same, in the use of code-push-server must be created when the different applications to distinguish (eg. CodePushDemo-ios and CodePushDemo-android)
+- React-native-code-push only update the resource file, will not update java and Objective C, so npm upgrade depends on the package version, if dependent on the use of localized package, this time must change the application version number (ios modify Info.plist CFBundleShortVersionString, Android modifies versionName in build.gradle) and then recompiles the app to the app store.
+- It is recommended to use the code-push release-react command to publish the application, which combines the package and release commands (eg code-push release-react CodePushDemo-ios ios -d Production)
+- Each time you submit a new version to the App Store, you should also publish an initial version to the code-push-server based on the submission. (Since each time a code-push-server is released, the code-puse-server compares with the initial version to generate the patch)
 
 ## EXAMPLE 
-api.code-push.com 只是一个测试server，不要将自己生产环境的项目放在上面，服务器的宽带只有1M，而且服务没有做负载均衡和监控，稳定性不能保证，烦请大家自己搭建自己的服务。
+Api.code-push.com is just a test server, do not put their own production environment on the project, the server broadband only 1M, and the service did not do load balancing and monitoring, stability can not guarantee, please yourself build their own services.
 
 ### shell命令行端
 
 ```shell
-$ code-push login http://api.code-push.com:8080 #登录
+$ code-push login http://api.code-push.com:8080 #Login
 ```
 
 ### [web](http://www.code-push.com:8080) 
 
 访问：http://www.code-push.com:8080
 
-### 客户端eg.
+### Client eg.
 
 [ReactNative CodePushDemo](https://github.com/lisong/code-push-demo-app)
 
@@ -46,8 +46,8 @@ $ code-push login http://api.code-push.com:8080 #登录
 
 ```shell
 $ npm install code-push-server -g
-$ code-push-server-db init --dbhost localhost --dbuser root --dbpassword #初始化mysql数据库
-$ code-push-server #启动服务 浏览器中打开 http://127.0.0.1:3000
+$ code-push-server-db init --dbhost localhost --dbuser root --dbpassword #Initialize the mysql database
+$ code-push-server #Open the service in the browser http://127.0.0.1:3000
 ```
 
 ## INSTALL FROM SOURCE CODE
@@ -56,8 +56,8 @@ $ code-push-server #启动服务 浏览器中打开 http://127.0.0.1:3000
 $ git clone https://github.com/lisong/code-push-server.git
 $ cd code-push-server
 $ npm install
-$ ./bin/db init --dbhost localhost --dbuser root --dbpassword #初始化mysql数据库
-$ ./bin/www #启动服务 浏览器中打开 http://127.0.0.1:3000
+$ ./bin/db init --dbhost localhost --dbuser root --dbpassword #Initialize the mysql database
+$ ./bin/www #Open the service in the browser http://127.0.0.1:3000
 ```
 
 ## UPGRADE
@@ -67,14 +67,14 @@ $ ./bin/www #启动服务 浏览器中打开 http://127.0.0.1:3000
 ```shell
 $ cd /path/to/code-push-server
 $ git pull --rebase origin master
-$ ./bin/db upgrade --dbhost localhost --dbuser root --dbpassword #升级codepush数据库
+$ ./bin/db upgrade --dbhost localhost --dbuser root --dbpassword #Upgrade the codepush database
 $ #restart code-push-server
 ```
 
 *from npm package*
 
 ```shell
-$ code-push-server-db upgrade --dbhost localhost --dbuser root --dbpassword #升级codepush数据库
+$ code-push-server-db upgrade --dbhost localhost --dbuser root --dbpassword # Upgrade the codepush database
 $ #restart code-push-server
 ```
 
@@ -82,7 +82,7 @@ $ #restart code-push-server
 ```shell
 $ vim config/config.js
 ```
-请检查如下配置是否和你的环境一致,尤其是downloadUrl参数
+Please check if the following configuration is consistent with your environment, especially the downloadUrl parameter
 
 ```
   db: {
@@ -92,39 +92,39 @@ $ vim config/config.js
     host: "127.0.0.1",
     dialect: "mysql"
   },
-  //七牛云存储配置 当storageType为qiniu时需要配置
+  //The storage cloud configuration configuration needs to be configured when storageType is qiniu
   qiniu: {
     accessKey: "",
     secretKey: "",
     bucketName: "",
-    downloadUrl: "" //文件下载域名地址
+    downloadUrl: "" //File download domain name
   },
-  //阿里云存储配置 当storageType为oss时需要配置
+  //Ali cloud storage configuration needs to be configured when storageType is oss
   oss: {
     accessKeyId: "",
     secretAccessKey: "",
     endpoint: "",
     bucketName: "",
-    prefix: "", // 对象Key的前缀，允许放到子文件夹里面
-    downloadUrl: "", // 文件下载域名地址，需要包含前缀
+    prefix: "", // The prefix of the object Key is allowed to be placed inside the subfolder
+    downloadUrl: "", // File download domain name address, need to include prefix
   },
-  //文件存储在本地配置 当storageType为local时需要配置
+  //The file is stored locally and needs to be configured when storageType is local
   local: {
     storageDir: "/Users/tablee/workspaces/storage",
-    //文件下载地址 CodePush Server 地址 + '/download' download对应app.js里面的地址
+    //File download address CodePush Server address + '/ download' download corresponding app.js inside the address
     downloadUrl: "http://localhost:3000/download",
     // public static download spacename.
     public: '/download'
   },
   jwt: {
-    // 登录jwt签名密钥，必须更改，否则有安全隐患，可以使用随机生成的字符串
+    // Login jwt signature key, must be changed, otherwise there are security risks, you can use the randomly generated string
     // Recommended: 63 random alpha-numeric characters
     // Generate using: https://www.grc.com/passwords.htm
     tokenSecret: 'INSERT_RANDOM_TOKEN_KEY'
   },
   common: {
     dataDir: "/Users/tablee/workspaces/data",
-    //选择存储类型，目前支持local,oss,qiniu,s3配置
+    //Select the storage type, currently supports local, oss, qiniu, s3 configuration
     storageType: "local"
   },
 ```
@@ -133,7 +133,7 @@ read [config.js](https://github.com/lisong/code-push-server/blob/master/config/c
 
 ## Storage mode [local/qiniu/s3]
 
-- 配置local存储,修改config/config.js中storageType值为local,配置中local下面storageDir和downloadUrl，如果不在同一台机器上，downloadUrl请指定域名或者ip地址
+- Configure local storage, modify config / config.js storageType value for the local, configuration in the following storageDir and downloadUrl local, if not on the same machine, downloadUrl Please specify the domain name or ip address
 
 
 ## RUN

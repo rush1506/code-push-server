@@ -4,8 +4,8 @@
             "name"      : "code-push-server",
             "max_memory_restart" : "300M",
             "script"    : "/path/to/code-push-server/bin/www",
-            "instances"  : "max", //开启实例数量，max为cpu核数
-            "exec_mode"  : "cluster", //集群模式，最大提升网站并发
+            "instances"  : "max", //Open the number of instances, max for the cpu count
+            "exec_mode"  : "cluster", //Cluster mode, the largest increase in the site concurrent
             "env" : {
                 "NODE_ENV" : "production",
                 "PORT" : 3000,

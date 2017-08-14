@@ -118,7 +118,7 @@ if (app.get('env') === 'development') {
       res.send(err);
     } else {
       var status = err.status || 500;
-      var error = new AppError.AppError(`服务器繁忙，请稍后再试!`);
+      var error = new AppError.AppError('The server is busy. Please try again later!');
       error.status = status;
       res.status(status).send(error);
       log.error(err);

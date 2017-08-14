@@ -258,7 +258,7 @@ proto.createDiffPackagesByLastNums = function (packageId, num) {
 
 proto.createDiffPackages = function (originalPackage, destPackages) {
   if (!_.isArray(destPackages)) {
-    return Promise.reject(new AppError.AppError('第二个参数必须是数组'));
+    return Promise.reject(new AppError.AppError('The second argument must be an array'));
   }
   if (destPackages.length <= 0) {
     return null;
@@ -295,8 +295,8 @@ proto.releasePackage = function (deploymentId, packageInfo, fileType, filePath, 
       if (fileType == "application/zip") {
         return common.unzipFile(filePath, directoryPath)
       } else {
-        log.debug(`上传的文件格式不对`);
-        throw new AppError.AppError("上传的文件格式不对");
+        log.debug(`Uploaded file format is wrong`);
+        throw new AppError.AppError("Uploaded file format is wrong");
       }
     })
   ])
@@ -446,7 +446,7 @@ proto.rollbackPackage = function (deploymentVersionId, targetLabel, rollbackUid)
   return models.DeploymentsVersions.findById(deploymentVersionId)
   .then((deploymentsVersions) => {
     if (!deploymentsVersions) {
-      throw new AppError.AppError("您之前还没有发布过版本");
+      throw new AppError.AppError("You have not released a version before");
     }
     return models.Packages.findById(deploymentsVersions.current_package_id)
     .then((currentPackageInfo) => {
@@ -470,7 +470,7 @@ proto.rollbackPackage = function (deploymentVersionId, targetLabel, rollbackUid)
           }
         }
       }
-      throw new AppError.AppError("没有可供回滚的版本");
+      throw new AppError.AppError("There is no rollback version available");
     })
     .then((rollbackPackage) => {
       var params = {

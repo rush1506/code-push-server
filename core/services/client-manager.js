@@ -115,7 +115,7 @@ proto.updateCheck = function(deploymentKey, appVersion, label, packageHash) {
     })
 
     .then((packages) => {
-      //差异化更新
+      //Differentiated updates
       if (!_.isEmpty(packages) && !_.eq(_.get(packages, 'package_hash', ""), packageHash)) {
         return models.PackagesDiff.findOne({where: {package_id:packages.id, diff_against_package_hash: packageHash}})
         .then((diffPackage) => {

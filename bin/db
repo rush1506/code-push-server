@@ -10,13 +10,13 @@ var mysql = require('mysql2');
 var Promise = require("bluebird");
 var yargs = require('yargs')
     .usage('Usage: $0 <command> [options]')
-    .command('init', '初始化数据库', {
+    .command('init', 'Initialize the database', {
       dbpassword: {
         alias: 'dbpassword',
         type: 'string'
       }
     })
-    .command('upgrade', '升级数据库', {
+    .command('upgrade', 'Upgrade the database', {
       dbpassword: {
         alias: 'dbpassword',
         type: 'string'

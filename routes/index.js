@@ -31,7 +31,7 @@ router.get('/README.md', (req, res, next) => {
 });
 
 router.get('/tokens', (req, res) => {
-  res.render('tokens', { title: '获取token' });
+  res.render('tokens', { title: 'Get token' });
 });
 
 router.get('/updateCheck', (req, res, next) => {
